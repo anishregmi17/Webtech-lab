@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Retrieve form data
     $email = $_POST["email"];
-    $password = sha1($_POST["password"]);
+    $password = md5($_POST["password"]);
 
     // Database connection parameters
     $servername = "localhost";

@@ -6,63 +6,58 @@
     <title>Login Form</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
+/* Style the login container */
 .login-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.login-form {
-    max-width: 300px;
+    width: 300px;
     margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
-.login-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
+/* Style the login form */
+.login-form {
+    display: flex;
+    flex-direction: column;
 }
 
+/* Style input fields and labels */
 .input-group {
     margin-bottom: 15px;
 }
 
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
+label {
+    font-weight: bold;
 }
 
-.input-group input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
+input[type="email"],
+input[type="password"] {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box; /* Ensure the padding and border are included in the width */
 }
 
-button:hover {
-    background-color: #0056b3;
+/* Style the submit button */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 }
+
+/* Hover effect for the submit button */
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
 
     </style>
 </head>
