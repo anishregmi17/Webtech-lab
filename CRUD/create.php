@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$query = "DROP DATABASE $dbname";
 
 	if(mysqli_query($conn, $query)){
-		echo "Database $dbname Created Successfully";
+		echo "Also the Successfull operations";
 	}
 
 }else{

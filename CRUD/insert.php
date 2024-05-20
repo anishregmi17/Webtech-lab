@@ -1,62 +1,45 @@
-<?php
-// Database connection parameters
-$host = 'localhost';
-$user = 'root';
-$password = '';
-$db = 'login_system'; // Use your database name here
 
-// Create connection
-$conn = mysqli_connect($host, $user, $password, $db);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+<?php 
+require("connect.php"); 
 ?>
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Insert Data</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Login Form</title>
 </head>
 <body>
-    <h1>Insert User</h1>
-    <hr>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br><br>
-        <button type="submit">Insert</button>
-    </form>
 
-    <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $name = $_POST['name'];
-        $password = $_POST['password'];
+<section>
+    <div class="container w-25 py-5 shadow my-5">
+        <div class="title mb-3 text-center">
+            <h4>Login</h4>
+        </div>
 
-        // Hash the password before storing it
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-        $query = "INSERT INTO users (name, password) VALUES (?, ?)";
-        $stmt = mysqli_prepare($conn, $query);
-
-        if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "ss", $name, $hashed_password);
-            mysqli_stmt_execute($stmt);
-            echo "User inserted successfully";
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
-
-        mysqli_stmt_close($stmt);
-    }
-
-    // Close the connection
-    mysqli_close($conn);
-    ?>
+        <form action="login_system/login.php" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email </label>
+            <input type="email" name="email" value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div>
+          <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+          </div>
+          <div class="my-3">
+            <span>I Haven't any account</span>
+            
+          <a class="text-decoration-none" href="register.php" role="button"> Register Now</a>
+          </div>
+        </form>
+    </div>
+</section>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>
