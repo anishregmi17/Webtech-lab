@@ -1,5 +1,7 @@
 <?php
-// copy to process_login.php
+// Start session to manage user authentication
+session_start();
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -22,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // SQL query to retrieve values from the table
-    $sql = "SELECT * FROM admins WHERE email='$email'"; 
+    $sql = "SELECT * FROM admins WHERE email='$email'";
     $result = $conn->query($sql);
 
     // Check if any rows were returned
@@ -34,16 +36,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $password_db = $row['password'];
 
             if($email == $email_db && $password == $password_db){
+                // Set session variables to mark user as logged in
+                $_SESSION['logged_in'] = true;
+                $_SESSION['email'] = $email;
+                // Display success message
                 echo "Login Success";
-            }else{
+                echo".<br>Now you can Logout too.<br>";
+            } else {
                 echo "Incorrect Password";
             }
         }
     } else {
-        echo "User Nor Found."; // Inform user about login failure
+        echo "User Not Found."; // Inform user about login failure
     }
 
     // Close connection
     $conn->close();
 }
+
+// Check if logout button is clicked
+if (isset($_GET["logout"]) && $_GET["logout"] == 'true') {
+    // Destroy session
+    session_destroy();
+    // Display logout success message
+    echo "Logout Success!";
+}
 ?>
+
+ <!-- Logout Button with Inline CSS -->
+<button onclick="confirmLogout()" style="padding: 10px 20px; background-color: #ff0000; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Logout</button>
+
+<script>
+function confirmLogout() {
+    // Display confirmation dialog
+    var confirmLogout = confirm("Are you sure you want to logout?");
+    // If user confirms, proceed with logout
+    if (confirmLogout) {
+        // Redirect user to login.php with logout parameter
+        window.location.href = "login.php?logout=true";
+    }
+}
+</script>
+
